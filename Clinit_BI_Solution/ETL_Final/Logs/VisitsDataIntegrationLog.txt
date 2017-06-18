@@ -1,0 +1,36 @@
+3/26/2017 7:10:47 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 7:10:47 PM - Location Bellevue. Total Records: 50
+3/26/2017 7:11:25 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 7:11:25 PM - Location Kirkland. Total Records: 48
+3/26/2017 7:11:25 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 7:11:25 PM - Location Redmond. Total Records: 56
+3/26/2017 7:55:32 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 7:55:32 PM - Location Bellevue. Total Records: 50
+3/26/2017 7:55:32 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 7:55:32 PM - Location Kirkland. Total Records: 48
+3/26/2017 7:55:32 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 7:55:32 PM - Location Redmond. Total Records: 56
+3/26/2017 8:02:54 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 8:02:54 PM - Location Bellevue. Total Records: 50
+3/26/2017 8:02:55 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 8:02:55 PM - Location Kirkland. Total Records: 48
+3/26/2017 8:02:55 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 8:02:55 PM - Location Redmond. Total Records: 56
+3/26/2017 8:24:11 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 8:24:11 PM - Location Bellevue. Total Records: 50
+3/26/2017 8:24:11 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 8:24:11 PM - Location Kirkland. Total Records: 48
+3/26/2017 8:24:11 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 8:24:11 PM - Location Redmond. Total Records: 56
+3/26/2017 8:37:10 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 8:37:10 PM - Location Bellevue. Total Records: 50
+3/26/2017 8:37:11 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 8:37:11 PM - Location Kirkland. Total Records: 48
+3/26/2017 8:37:11 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 8:37:11 PM - Location Redmond. Total Records: 56
+3/26/2017 8:42:00 PM - Processing File: C:\ClinicDailyData\Bellevue\20100102Visits.csv
+3/26/2017 8:42:00 PM - Location Bellevue. Total Records: 50
+3/26/2017 8:42:00 PM - Processing File: C:\ClinicDailyData\Kirkland\20100102Visits.csv
+3/26/2017 8:42:00 PM - Location Kirkland. Total Records: 48
+3/26/2017 8:42:01 PM - Processing File: C:\ClinicDailyData\Redmond\20100102Visits.csv
+3/26/2017 8:42:01 PM - Location Redmond. Total Records: 56

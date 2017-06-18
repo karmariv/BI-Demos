@@ -1,0 +1,1670 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "name": "SqlServer localhost Patients",
+        "connectionString": "Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=Patients;Integrated Security=SSPI;Persist Security Info=false",
+        "impersonationMode": "impersonateAccount",
+        "account": "home\\Admin",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      },
+      {
+        "name": "SqlServer localhost DoctorsSchedules",
+        "connectionString": "Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=DoctorsSchedules;Integrated Security=SSPI;Persist Security Info=false",
+        "impersonationMode": "impersonateAccount",
+        "account": "home\\Admin",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "Visits",
+        "columns": [
+          {
+            "name": "ID",
+            "dataType": "int64",
+            "sourceColumn": "ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Date",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "Clinic",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Clinic",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Patient",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Patient",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Doctor",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Doctor",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Procedure",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Procedure",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Charge",
+            "dataType": "decimal",
+            "sourceColumn": "Charge",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          },
+          {
+            "type": "calculated",
+            "name": "DateKey",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "FORMAT([Date], \"YYYYMMdd\")"
+          },
+          {
+            "type": "calculated",
+            "name": "ClinicID",
+            "dataType": "double",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "[Clinic] / 100"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Visits",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Visits].* FROM [dbo].[Visits] ",
+              "dataSource": "SqlServer localhost Patients"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Visits].* FROM [dbo].[Visits] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Visits"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Patients",
+        "columns": [
+          {
+            "name": "ID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FName",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "FName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "LName",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Email",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Email",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Address",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Address",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State",
+            "sourceProviderType": "Char"
+          },
+          {
+            "type": "calculated",
+            "name": "FullName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "[FName] & \" \" & [LName]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Patients",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Patients].[ID],[dbo].[Patients].[FName],[dbo].[Patients].[LName],[dbo].[Patients].[Email],[dbo].[Patients].[Address],[dbo].[Patients].[City],[dbo].[Patients].[State] FROM [dbo].[Patients] ",
+              "dataSource": "SqlServer localhost Patients"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>41</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>63</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>62</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Email</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>54</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>49</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>56</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ZipCode</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Email</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ZipCode</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ZipCode</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>false</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1",
+            "levels": [
+              {
+                "name": "State",
+                "ordinal": 0,
+                "column": "State"
+              },
+              {
+                "name": "City",
+                "ordinal": 1,
+                "column": "City"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Patients].[ID],[dbo].[Patients].[FName],[dbo].[Patients].[LName],[dbo].[Patients].[Email],[dbo].[Patients].[Address],[dbo].[Patients].[City],[dbo].[Patients].[State] FROM [dbo].[Patients] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Patients"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>ID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>41</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>63</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>62</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Email</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>54</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>49</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>56</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ZipCode</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>ID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Email</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ZipCode</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>ZipCode</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>false</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Procedures",
+        "columns": [
+          {
+            "name": "ID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Desc",
+            "dataType": "string",
+            "sourceColumn": "Desc",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Charge",
+            "dataType": "decimal",
+            "sourceColumn": "Charge",
+            "formatString": "\\$#,0.00;(\\$#,0.00);\\$#,0.00",
+            "sourceProviderType": "Currency",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"Currency\" Accuracy=\"2\" ThousandSeparator=\"True\"><Currency LCID=\"1033\" DisplayName=\"$ English (United States)\" Symbol=\"$\" PositivePattern=\"0\" NegativePattern=\"0\" /></Format>"
+              }
+            ]
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Procedures",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Procedures].* FROM [dbo].[Procedures] ",
+              "dataSource": "SqlServer localhost Patients"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Procedures].* FROM [dbo].[Procedures] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Procedures"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Clinics",
+        "columns": [
+          {
+            "name": "ClinicID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ClinicID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Clinic Name",
+            "dataType": "string",
+            "sourceColumn": "ClinicName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Address",
+            "dataType": "string",
+            "sourceColumn": "Address",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Clinics",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Clinics].[ClinicID],[dbo].[Clinics].[ClinicName],[dbo].[Clinics].[Address],[dbo].[Clinics].[City],[dbo].[Clinics].[State] FROM [dbo].[Clinics] ",
+              "dataSource": "SqlServer localhost DoctorsSchedules"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ClinicID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>65</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ClinicName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>81</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>49</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>56</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>44</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ClinicID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ClinicName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>false</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1",
+            "levels": [
+              {
+                "name": "State",
+                "ordinal": 0,
+                "column": "State"
+              },
+              {
+                "name": "City",
+                "ordinal": 1,
+                "column": "City"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Clinics].[ClinicID],[dbo].[Clinics].[ClinicName],[dbo].[Clinics].[Address],[dbo].[Clinics].[City],[dbo].[Clinics].[State] FROM [dbo].[Clinics] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Clinics"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>ClinicID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>65</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ClinicName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>81</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>49</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>56</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>44</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>ClinicID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ClinicName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>false</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Doctors",
+        "columns": [
+          {
+            "name": "DoctorID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DoctorID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FirstName",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "FirstName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "LastName",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "LastName",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Address",
+            "dataType": "string",
+            "sourceColumn": "Address",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "State",
+            "dataType": "string",
+            "sourceColumn": "State",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "type": "calculated",
+            "name": "Doctor Full Name",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "[FirstName] & \" \" &  [LastName]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Doctors",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Doctors].[DoctorID],[dbo].[Doctors].[FirstName],[dbo].[Doctors].[LastName],[dbo].[Doctors].[Address],[dbo].[Doctors].[City],[dbo].[Doctors].[State] FROM [dbo].[Doctors] ",
+              "dataSource": "SqlServer localhost DoctorsSchedules"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>DoctorID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>73</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FirstName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>78</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>77</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>EmailAddress</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>93</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>49</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>56</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>44</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>DoctorID</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FirstName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LastName</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>EmailAddress</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Address</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>City</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>State</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>EmailAddress</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>false</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Zip</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>false</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1",
+            "levels": [
+              {
+                "name": "State",
+                "ordinal": 0,
+                "column": "State"
+              },
+              {
+                "name": "City",
+                "ordinal": 1,
+                "column": "City"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Doctors].[DoctorID],[dbo].[Doctors].[FirstName],[dbo].[Doctors].[LastName],[dbo].[Doctors].[Address],[dbo].[Doctors].[City],[dbo].[Doctors].[State] FROM [dbo].[Doctors] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Doctors"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>DoctorID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>73</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FirstName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>78</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>77</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>EmailAddress</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>93</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>49</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>56</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>44</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>DoctorID</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FirstName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LastName</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>EmailAddress</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Address</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>City</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>State</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>EmailAddress</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>false</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Zip</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>false</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DoctorShifts",
+        "columns": [
+          {
+            "name": "DoctorsShiftID",
+            "dataType": "int64",
+            "sourceColumn": "DoctorsShiftID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ShiftDate",
+            "dataType": "dateTime",
+            "sourceColumn": "ShiftDate",
+            "formatString": "General Date",
+            "sourceProviderType": "DBTimeStamp"
+          },
+          {
+            "name": "ClinicID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ClinicID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ShiftID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ShiftID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DoctorID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DoctorID",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "DoctorShifts",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[DoctorShifts].* FROM [dbo].[DoctorShifts] ",
+              "dataSource": "SqlServer localhost DoctorsSchedules"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[DoctorShifts].* FROM [dbo].[DoctorShifts] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "DoctorShifts"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Shifts",
+        "columns": [
+          {
+            "name": "ShiftID",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ShiftID",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ShiftStart_Original",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "ShiftStart",
+            "formatString": "General Date",
+            "sourceProviderType": "145"
+          },
+          {
+            "name": "ShiftEnd_Original",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "ShiftEnd",
+            "formatString": "General Date",
+            "sourceProviderType": "145"
+          },
+          {
+            "type": "calculated",
+            "name": "ShiftStart",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "expression": "IF(FORMAT([ShiftStart_Original], \"HH:mm:ss\") = \"01:00:00\", TIME(13,0,0), [ShiftStart_Original])",
+            "formatString": "General Date"
+          },
+          {
+            "type": "calculated",
+            "name": "ShiftEnd",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "expression": "IF(FORMAT([ShiftEnd_Original], \"HH:mm:ss\") = \"05:00:00\", TIME(17,0,0), [ShiftEnd_Original])",
+            "formatString": "General Date"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Shifts",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [dbo].[Shifts].* FROM [dbo].[Shifts] ",
+              "dataSource": "SqlServer localhost DoctorsSchedules"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [dbo].[Shifts].* FROM [dbo].[Shifts] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "Shifts"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "FullDate",
+            "dataType": "dateTime",
+            "isNameInferred": false,
+            "isDataTypeInferred": true,
+            "isKey": true,
+            "sourceColumn": "[Date]",
+            "formatString": "General Date"
+          },
+          {
+            "type": "calculated",
+            "name": "YearID",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "Year([FullDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "MonthID",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "Month([FullDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "YearName",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "Year([FullDate])"
+          },
+          {
+            "type": "calculated",
+            "name": "MonthName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "FORMAT(Month([FullDate]), \"MMMM\")"
+          },
+          {
+            "type": "calculated",
+            "name": "DateKey",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "expression": "FORMAT([FullDate], \"YYYYMMdd\")"
+          },
+          {
+            "type": "calculated",
+            "name": "FullDateName",
+            "dataType": "string",
+            "isDataTypeInferred": true,
+            "expression": "CONCATENATE(CONCATENATE(CONCATENATE(FORMAT(MONTH([FullDate]), \"MMMM\"), \", \"), DAY([FullDate])), CONCATENATE(\" \", YEAR([FullDate])))"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "CALENDAR(DATE(2005,01,01), DATE(2011,01,01))"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Hierarchy1",
+            "levels": [
+              {
+                "name": "YearName",
+                "ordinal": 0,
+                "column": "YearName"
+              },
+              {
+                "name": "MonthName",
+                "ordinal": 1,
+                "column": "MonthName"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "c109185d-9cb1-4eb2-8233-ebe41aafdd5f",
+        "fromTable": "DoctorShifts",
+        "fromColumn": "ClinicID",
+        "toTable": "Clinics",
+        "toColumn": "ClinicID"
+      },
+      {
+        "name": "4b8abd17-5399-4762-b89e-d3618e6f430b",
+        "fromTable": "DoctorShifts",
+        "fromColumn": "DoctorID",
+        "toTable": "Doctors",
+        "toColumn": "DoctorID"
+      },
+      {
+        "name": "bf4a3cb4-3cc8-4d4b-b722-6e1fe8ebf40a",
+        "fromTable": "DoctorShifts",
+        "fromColumn": "ShiftID",
+        "toTable": "Shifts",
+        "toColumn": "ShiftID"
+      },
+      {
+        "name": "010260ff-2ab1-47e8-861f-2b784f491eaa",
+        "fromTable": "Visits",
+        "fromColumn": "Doctor",
+        "toTable": "Doctors",
+        "toColumn": "DoctorID"
+      },
+      {
+        "name": "7e0373f5-13fa-4b6f-a56e-7788074ebabc",
+        "fromTable": "Visits",
+        "fromColumn": "Patient",
+        "toTable": "Patients",
+        "toColumn": "ID"
+      },
+      {
+        "name": "bcb4eeee-d43b-4dba-a9b5-cb9cb3412483",
+        "fromTable": "Visits",
+        "fromColumn": "Procedure",
+        "toTable": "Procedures",
+        "toColumn": "ID"
+      },
+      {
+        "name": "0598e159-fd25-498b-b58f-089d927558ef",
+        "fromTable": "Visits",
+        "fromColumn": "DateKey",
+        "toTable": "Date",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "df0ae444-e55e-4609-90a7-c02715480ea0",
+        "fromTable": "Visits",
+        "fromColumn": "ClinicID",
+        "toTable": "Clinics",
+        "toColumn": "ClinicID"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

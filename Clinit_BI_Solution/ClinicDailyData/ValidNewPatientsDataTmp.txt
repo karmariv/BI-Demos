@@ -1,0 +1,6 @@
+John,Smith,Check Jsmith.YayYou.com,456 1st Drive,Bellevue,WA,98004
+Michael,Hays,MHays@GSale.com,778  E West St.,Bellevue,WA,98004
+Jim,Thomas,JThomas@YayYou.com,431 55th Ave,Bellevue,WA,98004
+Dell,Drake,DDrake@WarmMail.com,166 3rd Ave.,Bothell,WA,98011
+Tom,Jameson,TJameson@YayYou.com,649 Valley Shops,Redmond,WA,98008
+Debbie,Krish,DKrish@Gsale,144 Elisnor Place,Redmond,WA,98008

@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "ETL_Final", "ETL_Final.dtproj", "{698510C9-447F-4EE4-A8BF-D4E965292AFF}"
+EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "Final_Tabular", "..\Final_Tabular\Final_Tabular.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{7845A309-3C6A-445D-8EE7-2424316E4A7E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Documents\BISolutionWorksheets.xlsx = ..\Documents\BISolutionWorksheets.xlsx
+		..\Documents\ClinicReport-InstallationGuideline.docx = ..\Documents\ClinicReport-InstallationGuideline.docx
+		..\Documents\ClinicReport-TechnicalSpecification.docx = ..\Documents\ClinicReport-TechnicalSpecification.docx
+		..\Documents\Final Checklist.xlsx = ..\Documents\Final Checklist.xlsx
+		..\Documents\LessonsLearned.docx = ..\Documents\LessonsLearned.docx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{4078EE26-DCE0-479D-B354-4ED7D7097863}"
+	ProjectSection(SolutionItems) = preProject
+		..\Scripts\dwclinicreport_etl_execute_script.sql = ..\Scripts\dwclinicreport_etl_execute_script.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create Datawarehouse", "Create Datawarehouse", "{D48EB5BC-BADF-4B7A-9129-54CFF6DEA9E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Scripts\Create Datawarehouse\DWClinicReportData.sql = ..\Scripts\Create Datawarehouse\DWClinicReportData.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create ETL", "Create ETL", "{FA378FEE-8A3B-4145-8DCB-2B65F1AA84CD}"
+	ProjectSection(SolutionItems) = preProject
+		..\Scripts\Create ETL\1_dwclinicreport_etl_drop_fks_procedure.sql = ..\Scripts\Create ETL\1_dwclinicreport_etl_drop_fks_procedure.sql
+		..\Scripts\Create ETL\2_dwclinicreport_etl_truncate_table_procedure.sql = ..\Scripts\Create ETL\2_dwclinicreport_etl_truncate_table_procedure.sql
+		..\Scripts\Create ETL\3_dwclinicreport_etl_build_dim_staging_tables.sql = ..\Scripts\Create ETL\3_dwclinicreport_etl_build_dim_staging_tables.sql
+		..\Scripts\Create ETL\4_dwclinicreport_etl_load_dimensions_procedures.sql = ..\Scripts\Create ETL\4_dwclinicreport_etl_load_dimensions_procedures.sql
+		..\Scripts\Create ETL\5_dwclinicreport_etl_load_dimdate_procedure.sql = ..\Scripts\Create ETL\5_dwclinicreport_etl_load_dimdate_procedure.sql
+		..\Scripts\Create ETL\6_dwclinicreport_etl_build_fact_staging_tables.sql = ..\Scripts\Create ETL\6_dwclinicreport_etl_build_fact_staging_tables.sql
+		..\Scripts\Create ETL\7_dwclinicreport_etl_load_facts_procedures.sql = ..\Scripts\Create ETL\7_dwclinicreport_etl_load_facts_procedures.sql
+		..\Scripts\Create ETL\8_dwclinicreport_etl_create_fks_procedure.sql = ..\Scripts\Create ETL\8_dwclinicreport_etl_create_fks_procedure.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create Integration Support Files", "Create Integration Support Files", "{D39B6D6F-61A9-4954-9021-FC5813FE4770}"
+	ProjectSection(SolutionItems) = preProject
+		..\Scripts\Create Integration Support Files\1_clinicdataintegration_create_staging_table_procedures.sql = ..\Scripts\Create Integration Support Files\1_clinicdataintegration_create_staging_table_procedures.sql
+		..\Scripts\Create Integration Support Files\2_clinicdataintegration_load_new_patients_procedure.sql = ..\Scripts\Create Integration Support Files\2_clinicdataintegration_load_new_patients_procedure.sql
+		..\Scripts\Create Integration Support Files\3_clinicdataintegration_load_new_visits_procedure.sql = ..\Scripts\Create Integration Support Files\3_clinicdataintegration_load_new_visits_procedure.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|x86 = Development|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{698510C9-447F-4EE4-A8BF-D4E965292AFF}.Development|x86.ActiveCfg = Development
+		{698510C9-447F-4EE4-A8BF-D4E965292AFF}.Development|x86.Build.0 = Development
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D48EB5BC-BADF-4B7A-9129-54CFF6DEA9E4} = {4078EE26-DCE0-479D-B354-4ED7D7097863}
+		{FA378FEE-8A3B-4145-8DCB-2B65F1AA84CD} = {4078EE26-DCE0-479D-B354-4ED7D7097863}
+		{D39B6D6F-61A9-4954-9021-FC5813FE4770} = {4078EE26-DCE0-479D-B354-4ED7D7097863}
+	EndGlobalSection
+EndGlobal
